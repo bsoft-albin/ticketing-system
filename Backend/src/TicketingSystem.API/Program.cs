@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.ResponseCompression;
-
-//using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -11,6 +9,7 @@ using TicketingSystem.Application;
 using TicketingSystem.Domain.Global;
 using TicketingSystem.Infrastructure;
 using TicketingSystem.Infrastructure.BackgroundServices;
+using TicketingSystem.Infrastructure.Data;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -150,7 +149,7 @@ app.MapHub<NotificationHub>("/hubs/notifications");
 using (IServiceScope scope = app.Services.CreateScope())
 {
     IServiceProvider services = scope.ServiceProvider;
-    await TicketingSystem.Infrastructure.Data.DatabaseSeeder.SeedRolesAsync(services);
+    await DatabaseSeeder.SeedRolesAsync(services);
 }
 
 app.Run();

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  LayoutDashboard, 
-  Ticket, 
-  Settings, 
-  LogOut, 
-  Bell, 
-  Menu, 
-  X, 
+import {
+  LayoutDashboard,
+  Ticket,
+  Settings,
+  LogOut,
+  Bell,
+  Menu,
+  X,
   FolderKanban,
   History,
   Users,
@@ -18,12 +18,12 @@ import {
 import { useAuthStore } from '../store/authStore';
 import { Button, cn } from '../components/ui/Button';
 
-const SidebarItem = ({ icon: Icon, label, href, active, collapsed }: { 
-  icon: any, 
-  label: string, 
-  href: string, 
+const SidebarItem = ({ icon: Icon, label, href, active, collapsed }: {
+  icon: any,
+  label: string,
+  href: string,
   active: boolean,
-  collapsed: boolean 
+  collapsed: boolean
 }) => (
   <Link
     to={href}
@@ -32,15 +32,15 @@ const SidebarItem = ({ icon: Icon, label, href, active, collapsed }: {
     <div
       className={cn(
         'flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 relative overflow-hidden',
-        active 
-          ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' 
+        active
+          ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200'
           : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'
       )}
     >
       <Icon className={cn('w-5 h-5 flex-shrink-0 relative z-10', active ? 'text-white' : 'text-slate-400 group-hover:text-slate-600')} />
       <AnimatePresence>
         {!collapsed && (
-          <motion.span 
+          <motion.span
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -10 }}
@@ -51,7 +51,7 @@ const SidebarItem = ({ icon: Icon, label, href, active, collapsed }: {
         )}
       </AnimatePresence>
       {active && (
-        <motion.div 
+        <motion.div
           layoutId="activeTab"
           className="absolute inset-0 bg-indigo-600 z-0"
         />
@@ -60,7 +60,7 @@ const SidebarItem = ({ icon: Icon, label, href, active, collapsed }: {
   </Link>
 );
 
-const Sidebar = ({ collapsed }: { collapsed: boolean, setCollapsed: (v: boolean) => void }) => {
+const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
 
   const location = useLocation();
   const user = useAuthStore((state) => state.user);
@@ -85,7 +85,7 @@ const Sidebar = ({ collapsed }: { collapsed: boolean, setCollapsed: (v: boolean)
             <Ticket className="w-6 h-6" />
           </div>
           {!collapsed && (
-            <motion.span 
+            <motion.span
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="font-black text-slate-900 text-xl tracking-tighter"
@@ -98,9 +98,9 @@ const Sidebar = ({ collapsed }: { collapsed: boolean, setCollapsed: (v: boolean)
 
       <nav className="flex-1 px-6 py-4 space-y-2 overflow-y-auto">
         {menuItems.map((item) => (
-          <SidebarItem 
-            key={item.href} 
-            {...item} 
+          <SidebarItem
+            key={item.href}
+            {...item}
             active={location.pathname === item.href}
             collapsed={collapsed}
           />
@@ -137,9 +137,9 @@ const Navbar = ({ collapsed, toggleSidebar }: { collapsed: boolean, toggleSideba
       collapsed ? 'left-24' : 'left-72'
     )}>
       <div className="flex items-center gap-6">
-        <Button 
-          variant="ghost" 
-          size="icon" 
+        <Button
+          variant="ghost"
+          size="icon"
           onClick={toggleSidebar}
           className="rounded-xl hover:bg-slate-100"
         >
@@ -147,9 +147,9 @@ const Navbar = ({ collapsed, toggleSidebar }: { collapsed: boolean, toggleSideba
         </Button>
         <div className="hidden md:flex items-center gap-3 px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl w-80 group focus-within:ring-2 focus-within:ring-indigo-100 transition-all">
           <Search className="w-4 h-4 text-slate-400 group-focus-within:text-indigo-500" />
-          <input 
-            type="text" 
-            placeholder="Search tickets..." 
+          <input
+            type="text"
+            placeholder="Search tickets..."
             className="bg-transparent border-none outline-none text-sm font-medium w-full placeholder:text-slate-400"
           />
         </div>
@@ -161,8 +161,8 @@ const Navbar = ({ collapsed, toggleSidebar }: { collapsed: boolean, toggleSideba
           <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-indigo-500 rounded-full border-2 border-white ring-2 ring-indigo-50"></span>
         </button>
         <div className="h-6 w-px bg-slate-200 mx-2"></div>
-        <Button 
-          variant="ghost" 
+        <Button
+          variant="ghost"
           size="sm"
           onClick={() => { logout(); navigate('/login'); }}
           className="text-slate-600 hover:text-rose-600 hover:bg-rose-50"
@@ -185,14 +185,15 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="min-h-screen bg-slate-50/50">
-      <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+      <Sidebar collapsed={collapsed} />
+
       <Navbar collapsed={collapsed} toggleSidebar={() => setCollapsed(!collapsed)} />
-      
+
       <main className={cn(
         'transition-all duration-500 pt-20 min-h-screen',
         collapsed ? 'pl-24' : 'pl-72'
       )}>
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           className="p-10 max-w-[1600px] mx-auto"

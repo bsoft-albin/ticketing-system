@@ -27,7 +27,11 @@ api.interceptors.response.use(
         const refreshToken = useAuthStore.getState().refreshToken;
         if (!refreshToken) throw new Error('No refresh token');
 
-        const { data } = await axios.post(`${api.defaults.baseURL}/auth/refresh-token`, refreshToken);
+        // Sending token as simple JSON string because backend expects [FromBody] string
+        const { data } = await axios.post(`${api.defaults.baseURL}/auth/refresh-token`, `"${refreshToken}"`, {
+          headers: { 'Content-Type': 'application/json' }
+        });
+
         useAuthStore.getState().setAuth(data.data);
         
         originalRequest.headers.Authorization = `Bearer ${data.data.token}`;

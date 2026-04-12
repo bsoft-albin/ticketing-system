@@ -143,8 +143,17 @@ public class AuthService(UserManager<User> userManager, IJwtService jwtService, 
 
         return ApiResponse<AuthResponseDto>.SuccessResult(new AuthResponseDto
         {
-            AccessToken = accessToken,
-            RefreshToken = refreshToken
+            Token = accessToken,
+            RefreshToken = refreshToken,
+            User = new UserDto
+            {
+                Id = user.Id,
+                UserName = user.UserName!,
+                Email = user.Email!,
+                FullName = user.FullName,
+                Role = roles.FirstOrDefault() ?? "EndUser"
+            }
         });
+
     }
 }
