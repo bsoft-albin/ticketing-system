@@ -36,6 +36,16 @@ builder.Services.AddResponseCompression(options =>
     options.Providers.Add<GzipCompressionProvider>();
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 // Application Server Configuration
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
@@ -127,6 +137,8 @@ app.UseHttpsRedirection();
 app.UseResponseCompression();
 
 app.UseRouting();
+
+app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
