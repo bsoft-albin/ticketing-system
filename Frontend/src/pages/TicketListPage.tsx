@@ -58,7 +58,7 @@ const TicketListPage = () => {
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h1 className="text-4xl font-black text-slate-900 tracking-tighter mb-2">Service Tickets</h1>
-          <p className="text-slate-500 font-bold uppercase text-[10px] tracking-[0.2em]">Manage and track all support requests</p>
+          <p className="text-slate-500 font-bold text-[10px]">Manage and track all support requests</p>
         </div>
         <div className="flex items-center gap-3">
           <Button variant="outline" onClick={() => setShowFilters(!showFilters)} className="bg-white border-slate-100">
@@ -84,7 +84,7 @@ const TicketListPage = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <div className="flex items-center gap-4 text-xs font-black text-slate-400 uppercase tracking-widest">
+          <div className="flex items-center gap-4 text-xs font-black text-slate-400">
             <span>Showing {data?.length || 0} Results</span>
             <div className="h-4 w-px bg-slate-200"></div>
             <span>Sorted by Date Created</span>
@@ -101,7 +101,7 @@ const TicketListPage = () => {
             >
               <div className="p-8 grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Status</label>
+                  <label className="text-[10px] font-black text-slate-400">Status</label>
                   <select className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold focus:ring-2 focus:ring-indigo-100 outline-none">
                     <option>All Statuses</option>
                     <option>Open</option>
@@ -110,7 +110,7 @@ const TicketListPage = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Priority</label>
+                  <label className="text-[10px] font-black text-slate-400">Priority</label>
                   <select className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold focus:ring-2 focus:ring-indigo-100 outline-none">
                     <option>All Priorities</option>
                     <option>Low</option>
@@ -120,7 +120,7 @@ const TicketListPage = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Application</label>
+                  <label className="text-[10px] font-black text-slate-400">Application</label>
                   <select className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold focus:ring-2 focus:ring-indigo-100 outline-none">
                     <option>All Apps</option>
                   </select>
@@ -137,12 +137,12 @@ const TicketListPage = () => {
           <table className="w-full text-left border-separate border-spacing-0">
             <thead>
               <tr className="bg-slate-50/30">
-                <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Subject & Req.</th>
-                <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Application</th>
-                <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Priority</th>
-                <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Status</th>
-                <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Owner</th>
-                <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] text-right">Actions</th>
+                <th className="px-8 py-5 text-[10px] font-black text-slate-400">Subject & Req.</th>
+                <th className="px-8 py-5 text-[10px] font-black text-slate-400">Application</th>
+                <th className="px-8 py-5 text-[10px] font-black text-slate-400">Priority</th>
+                <th className="px-8 py-5 text-[10px] font-black text-slate-400">Status</th>
+                <th className="px-8 py-5 text-[10px] font-black text-slate-400">Owner</th>
+                <th className="px-8 py-5 text-[10px] font-black text-slate-400 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
@@ -156,8 +156,8 @@ const TicketListPage = () => {
                 <tr key={ticket.id} className="group hover:bg-slate-50/50 transition-all cursor-pointer">
                   <td className="px-8 py-6">
                     <div className="flex flex-col">
-                      <span className="text-sm font-black text-slate-900 group-hover:text-indigo-600 transition-colors uppercase tracking-tight">{ticket.title}</span>
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">ID: {ticket.id.slice(0, 8)}...</span>
+                      <span className="text-sm font-black text-slate-900 group-hover:text-indigo-600 transition-colors tracking-tight">{ticket.title}</span>
+                      <span className="text-[10px] font-bold text-slate-400 mt-1">ID: {ticket.id.slice(0, 8)}...</span>
                     </div>
                   </td>
                   <td className="px-8 py-6">
@@ -195,7 +195,7 @@ const TicketListPage = () => {
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-slate-50 rounded-3xl mb-4">
                       <Search className="w-10 h-10 text-slate-200" />
                     </div>
-                    <p className="text-slate-400 font-bold uppercase text-xs tracking-widest">No tickets match your search criteria</p>
+                    <p className="text-slate-400 font-bold text-xs">No tickets match your search criteria</p>
                   </td>
                 </tr>
               )}
@@ -204,7 +204,7 @@ const TicketListPage = () => {
         </div>
 
         <div className="px-8 py-6 border-t border-slate-50 flex items-center justify-between">
-          <p className="text-xs font-black text-slate-400 uppercase tracking-widest">
+          <p className="text-xs font-black text-slate-400">
             Showing <span className="text-slate-900">{data?.length || 0}</span> of <span className="text-slate-900">120</span> tickets
           </p>
           <div className="flex items-center gap-2">

@@ -75,16 +75,16 @@ const TicketDetailPage = () => {
 
   const getPriorityBadge = (priority: TicketPriority) => {
     switch (priority) {
-      case TicketPriority.LOW: return <Badge variant="info" size="sm">LOW</Badge>;
-      case TicketPriority.MEDIUM: return <Badge variant="warning" size="sm">MEDIUM</Badge>;
-      case TicketPriority.HIGH: return <Badge variant="danger" size="sm">HIGH</Badge>;
-      case TicketPriority.CRITICAL: return <Badge className="bg-rose-600 text-white" size="sm">CRITICAL</Badge>;
+      case TicketPriority.LOW: return <Badge variant="info" size="sm">Low</Badge>;
+      case TicketPriority.MEDIUM: return <Badge variant="warning" size="sm">Medium</Badge>;
+      case TicketPriority.HIGH: return <Badge variant="danger" size="sm">High</Badge>;
+      case TicketPriority.CRITICAL: return <Badge className="bg-rose-600 text-white" size="sm">Critical</Badge>;
       default: return null;
     }
   };
 
-  if (isTicketLoading) return <div className="p-20 text-center font-black text-slate-400 uppercase tracking-[0.2em] animate-pulse">Synchronizing Data Node...</div>;
-  if (!ticket) return <div className="p-20 text-center font-black text-rose-500 uppercase tracking-[0.2em]">Data Hub Error: Ticket Not Found</div>;
+  if (isTicketLoading) return <div className="p-20 text-center font-black text-slate-400 animate-pulse">Synchronizing data node...</div>;
+  if (!ticket) return <div className="p-20 text-center font-black text-rose-500">Data hub error: Ticket not found</div>;
 
   return (
     <div className="space-y-10">
@@ -96,9 +96,9 @@ const TicketDetailPage = () => {
           </Button>
           <div className="space-y-1">
             <div className="flex items-center gap-3">
-              <span className="text-[10px] font-black text-indigo-600 uppercase tracking-[0.2em]">T-{ticket.id.slice(0, 8).toUpperCase()}</span>
+              <span className="text-[10px] font-black text-indigo-600 tracking-tight">T-{ticket.id.slice(0, 8)}</span>
               <div className="w-1 h-1 bg-slate-300 rounded-full"></div>
-              <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{ticket.appName}</span>
+              <span className="text-[10px] font-black text-slate-400">{ticket.appName}</span>
             </div>
             <h1 className="text-4xl font-black text-slate-900 tracking-tighter">{ticket.title}</h1>
           </div>
@@ -124,7 +124,7 @@ const TicketDetailPage = () => {
                 </div>
                 <div>
                   <p className="text-lg font-black text-slate-900 tracking-tight">{ticket.creatorName}</p>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] flex items-center gap-2">
+                  <p className="text-[10px] font-black text-slate-400 flex items-center gap-2">
                     <Calendar className="w-3.5 h-3.5" /> Published on {new Date(ticket.createdAt).toLocaleDateString()}
                   </p>
                 </div>
@@ -146,13 +146,13 @@ const TicketDetailPage = () => {
             <div className="mt-10 pt-10 border-t border-slate-50 flex flex-wrap gap-6">
               <div className="flex items-center gap-3 px-5 py-2.5 bg-slate-50 rounded-2xl border border-slate-100">
                 <AlertCircle className="w-4 h-4 text-slate-400" />
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Impact:</span>
+                <span className="text-[10px] font-black text-slate-400">Impact:</span>
                 {getPriorityBadge(ticket.priority)}
               </div>
               <div className="flex items-center gap-3 px-5 py-2.5 bg-slate-50 rounded-2xl border border-slate-100">
                 <Tag className="w-4 h-4 text-slate-400" />
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Category:</span>
-                <span className="text-[10px] font-black text-slate-900 uppercase tracking-widest">{ticket.type === 0 ? 'Bug' : ticket.type === 1 ? 'Feature' : 'Enhancement'}</span>
+                <span className="text-[10px] font-black text-slate-400">Category:</span>
+                <span className="text-[10px] font-black text-slate-900">{ticket.type === 0 ? 'Bug' : ticket.type === 1 ? 'Feature' : 'Enhancement'}</span>
               </div>
             </div>
           </Card>
@@ -180,8 +180,8 @@ const TicketDetailPage = () => {
                   <div className="flex-1">
                     <Card className="border-none shadow-xl shadow-slate-200/30 group-hover:shadow-indigo-100/50 transition-all" padding="sm">
                       <div className="flex items-center justify-between mb-3">
-                        <span className="text-sm font-black text-slate-900 uppercase tracking-tight">{comment.userName}</span>
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                        <span className="text-sm font-black text-slate-900 tracking-tight">{comment.userName}</span>
+                        <span className="text-[10px] font-black text-slate-400 flex items-center gap-2">
                           <Clock className="w-3.5 h-3.5" />
                           {new Date(comment.createdAt).toLocaleTimeString()}
                         </span>
@@ -210,7 +210,7 @@ const TicketDetailPage = () => {
                     <div className="w-px h-6 bg-slate-100"></div>
                     <label className="flex items-center gap-3 cursor-pointer group">
                       <input type="checkbox" className="w-4 h-4 rounded-lg border-slate-300 text-indigo-600 focus:ring-indigo-500 transition-all" />
-                      <span className="text-[10px] font-black text-slate-400 group-hover:text-slate-900 uppercase tracking-widest transition-colors">Internal Directive</span>
+                      <span className="text-[10px] font-black text-slate-400 group-hover:text-slate-900 transition-colors">Internal directive</span>
                     </label>
                   </div>
                   <Button
@@ -237,7 +237,7 @@ const TicketDetailPage = () => {
             </div>
             <div className="p-8 space-y-8">
               <div className="space-y-3">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Operational Owner</p>
+                <p className="text-[10px] font-black text-slate-400">Operational owner</p>
                 {ticket.assignedTo ? (
                   <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 group cursor-pointer hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     <div className="w-12 h-12 rounded-[1.25rem] bg-indigo-600 text-white flex items-center justify-center font-black text-sm shadow-xl shadow-indigo-100 group-hover:rotate-6 transition-transform">
@@ -245,44 +245,44 @@ const TicketDetailPage = () => {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-black text-slate-900 truncate">{ticket.assigneeName}</p>
-                      <p className="text-[10px] font-black text-emerald-500 uppercase tracking-widest mt-1">Status: Active</p>
+                      <p className="text-[10px] font-black text-emerald-500 mt-1">Status: Active</p>
                     </div>
                     <Button variant="ghost" size="icon" className="w-8 h-8 rounded-xl">
                       <Edit className="w-4 h-4 text-slate-400" />
                     </Button>
                   </div>
                 ) : (
-                  <Button variant="outline" className="w-full h-14 border-dashed border-2 border-slate-200 text-slate-400 hover:text-indigo-600 hover:border-indigo-200 hover:bg-indigo-50 transition-all font-black text-xs flex items-center justify-center gap-3 rounded-2xl tracking-widest">
-                    <UserPlus className="w-4 h-4" /> REASSIGN AGENT
+                  <Button variant="outline" className="w-full h-14 border-dashed border-2 border-slate-200 text-slate-400 hover:text-indigo-600 hover:border-indigo-200 hover:bg-indigo-50 transition-all font-black text-xs flex items-center justify-center gap-3 rounded-2xl">
+                    <UserPlus className="w-4 h-4" /> reassign agent
                   </Button>
                 )}
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Environment</p>
-                  <p className="text-xs font-black text-slate-900 px-4 py-3 bg-slate-50 rounded-xl border border-slate-100 uppercase tracking-tight">Cluster Beta</p>
+                  <p className="text-[10px] font-black text-slate-400">Environment</p>
+                  <p className="text-xs font-black text-slate-900 px-4 py-3 bg-slate-50 rounded-xl border border-slate-100">Cluster Beta</p>
                 </div>
                 <div className="space-y-2">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Lifecycle</p>
-                  <p className="text-xs font-black text-slate-900 px-4 py-3 bg-slate-50 rounded-xl border border-slate-100 uppercase tracking-tight">Maintenance</p>
+                  <p className="text-[10px] font-black text-slate-400">Lifecycle</p>
+                  <p className="text-xs font-black text-slate-900 px-4 py-3 bg-slate-50 rounded-xl border border-slate-100">Maintenance</p>
                 </div>
               </div>
 
               <div className="space-y-3">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">SLA Countdown</p>
+                <p className="text-[10px] font-black text-slate-400">SLA Countdown</p>
                 <div className="flex items-center gap-3 p-4 bg-rose-50 text-rose-700 rounded-2xl border border-rose-100 animate-pulse">
                   <Clock className="w-5 h-5" />
-                  <span className="text-xs font-black uppercase tracking-[0.1em]">Expiring in 03:42:15</span>
+                  <span className="text-xs font-black">Expiring in 03:42:15</span>
                 </div>
               </div>
             </div>
             <div className="p-6 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between gap-4">
               <Button variant="ghost" className="text-rose-600 font-black text-xs hover:bg-rose-50 px-4">
-                <Trash2 className="w-4 h-4 mr-2" /> PURGE
+                <Trash2 className="w-4 h-4 mr-2" /> Purge
               </Button>
               <Button variant="ghost" className="text-slate-500 font-black text-xs hover:bg-slate-200 px-4">
-                <Lock className="w-4 h-4 mr-2" /> LOCK
+                <Lock className="w-4 h-4 mr-2" /> Lock
               </Button>
             </div>
           </Card>
@@ -301,15 +301,15 @@ const TicketDetailPage = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-black text-slate-900 truncate">log_fragment_{i}.enc</p>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">SHA-256 Verified</p>
+                    <p className="text-[10px] font-black text-slate-400">SHA-256 verified</p>
                   </div>
                   <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl">
                     <Download className="w-4 h-4 text-slate-400" />
                   </Button>
                 </div>
               ))}
-              <Button variant="outline" className="w-full h-14 border-dashed border-2 border-slate-200 text-slate-400 hover:text-indigo-600 hover:border-indigo-200 hover:bg-indigo-50 transition-all font-black text-xs rounded-[1.25rem] tracking-widest uppercase">
-                Add New Artifact
+              <Button variant="outline" className="w-full h-14 border-dashed border-2 border-slate-200 text-slate-400 hover:text-indigo-600 hover:border-indigo-200 hover:bg-indigo-50 transition-all font-black text-xs rounded-[1.25rem]">
+                Add new artifact
               </Button>
             </div>
           </Card>

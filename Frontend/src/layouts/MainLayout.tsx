@@ -113,12 +113,12 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
           collapsed ? 'justify-center' : ''
         )}>
           <div className="w-10 h-10 rounded-xl overflow-hidden bg-slate-200 border-2 border-white shadow-sm flex-shrink-0">
-            {user?.avatarUrl ? <img src={user.avatarUrl} className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center bg-indigo-50 text-indigo-500 font-bold uppercase">{user?.fullName?.charAt(0) || 'U'}</div>}
+            {user?.avatarUrl ? <img src={user.avatarUrl} className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center bg-indigo-50 text-indigo-500 font-bold">{user?.fullName?.charAt(0) || 'U'}</div>}
           </div>
           {!collapsed && (
             <div className="flex-1 min-w-0">
               <p className="text-sm font-black text-slate-900 truncate leading-none mb-1">{user?.fullName || 'User Name'}</p>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest truncate">{user?.role || 'Agent'}</p>
+              <p className="text-[10px] font-bold text-slate-400 truncate">{user?.role || 'Agent'}</p>
             </div>
           )}
         </div>

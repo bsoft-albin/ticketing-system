@@ -8,6 +8,9 @@ import DashboardPage from './pages/DashboardPage';
 import TicketListPage from './pages/TicketListPage';
 import ApplicationListPage from './pages/ApplicationListPage';
 import AuditLogPage from './pages/AuditLogPage';
+import UsersPage from './pages/UsersPage';
+import SettingsPage from './pages/SettingsPage';
+import TicketDetailPage from './pages/TicketDetailPage';
 import MainLayout from './layouts/MainLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -40,8 +43,11 @@ function App() {
             >
               <Route index element={<DashboardPage />} />
               <Route path="tickets" element={<TicketListPage />} />
+              <Route path="tickets/:id" element={<TicketDetailPage />} />
               <Route path="applications" element={<ApplicationListPage />} />
+              <Route path="users" element={<UsersPage />} />
               <Route path="audit-logs" element={<AuditLogPage />} />
+              <Route path="settings" element={<SettingsPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
           </Route>

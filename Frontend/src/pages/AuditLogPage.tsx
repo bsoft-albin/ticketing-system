@@ -31,7 +31,7 @@ const AuditLogPage = () => {
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h1 className="text-4xl font-black text-slate-900 tracking-tighter mb-2">Immutable Audit Trails</h1>
-          <p className="text-slate-500 font-bold uppercase text-[10px] tracking-[0.2em]">Verified system activity and security logs</p>
+          <p className="text-slate-500 font-bold text-[10px]">Verified system activity and security logs</p>
         </div>
         <div className="flex items-center gap-3">
           <Button variant="outline" className="bg-white border-slate-100">
@@ -48,21 +48,21 @@ const AuditLogPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <div className="lg:col-span-1 space-y-6">
           <Card className="border-none" padding="sm">
-            <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 px-1">Statistics</h4>
+            <h4 className="text-xs font-black text-slate-400 mb-6 px-1">Statistics</h4>
             <div className="space-y-4">
               <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Total Logs</p>
+                <p className="text-[10px] font-black text-slate-400 mb-1">Total logs</p>
                 <p className="text-2xl font-black text-slate-900">{logs?.length || 0}</p>
               </div>
               <div className="p-4 bg-emerald-50 text-emerald-700 rounded-2xl border border-emerald-100">
-                <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-1">Security Events</p>
+                <p className="text-[10px] font-black text-emerald-400 mb-1">Security events</p>
                 <p className="text-2xl font-black">24</p>
               </div>
             </div>
           </Card>
 
           <Card className="border-none" padding="sm">
-            <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-6 px-1">Quick Filter</h4>
+            <h4 className="text-xs font-black text-slate-400 mb-6 px-1">Quick filter</h4>
             <div className="space-y-4">
               {['All Activities', 'User Actions', 'System Tasks', 'Security Alerts'].map((f, i) => (
                 <button key={i} className={cn(
@@ -93,7 +93,7 @@ const AuditLogPage = () => {
             <div className="p-8">
               <div className="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-200 before:to-transparent">
                 {isLoading ? (
-                  <div className="text-center py-12 text-slate-400 font-bold uppercase text-xs tracking-widest">Hydrating audit trails...</div>
+                  <div className="text-center py-12 text-slate-400 font-bold text-xs">Hydrating audit trails...</div>
                 ) : logs?.map((log, index) => (
                   <motion.div
                     key={log.id}
@@ -109,23 +109,23 @@ const AuditLogPage = () => {
                     <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white border border-slate-50 p-6 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 group-hover:-translate-y-1">
                       <div className="flex items-center justify-between mb-4">
                         <Badge variant="primary" size="sm" className="font-black">{log.entityName}</Badge>
-                        <time className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{new Date(log.timestamp).toLocaleString()}</time>
+                        <time className="text-[10px] font-black text-slate-400">{new Date(log.timestamp).toLocaleString()}</time>
                       </div>
                       <div className="space-y-4">
                         <p className="text-sm font-bold text-slate-900 tracking-tight leading-relaxed">
-                          Action <span className="text-indigo-600 uppercase italic">{log.action}</span> performed on {log.entityName} record.
+                          Action <span className="text-indigo-600 italic">{log.action}</span> performed on {log.entityName} record.
                         </p>
                         <div className="flex items-center gap-3 py-3 border-y border-slate-50">
                           <div className="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500">
                             <User className="w-4 h-4" />
                           </div>
                           <div>
-                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Executor</p>
+                            <p className="text-[10px] font-black text-slate-400 leading-none mb-1">Executor</p>
                             <p className="text-xs font-black text-slate-900">{log.userName || 'System'}</p>
                           </div>
                         </div>
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2 text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                          <div className="flex items-center gap-2 text-[10px] font-black text-slate-500">
                             <Database className="w-3.5 h-3.5" />
                             ID: {log.entityId.slice(0, 8)}...
                           </div>

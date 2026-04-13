@@ -34,7 +34,7 @@ const ApplicationListPage = () => {
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h1 className="text-4xl font-black text-slate-900 tracking-tighter mb-2">Application Registry</h1>
-          <p className="text-slate-500 font-bold uppercase text-[10px] tracking-[0.2em]">Manage connected projects and service units</p>
+          <p className="text-slate-500 font-bold text-[10px]">Manage connected projects and service units</p>
         </div>
         <Button className="shadow-2xl shadow-indigo-200">
           <Plus className="w-5 h-5 mr-2" />
@@ -53,7 +53,7 @@ const ApplicationListPage = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="flex items-center gap-4 text-xs font-black text-slate-400 uppercase tracking-widest">
+        <div className="flex items-center gap-4 text-xs font-black text-slate-400">
           <span>Active Nodes: {applications?.length || 0}</span>
           <div className="h-4 w-px bg-slate-200"></div>
           <span>Status: Optimized</span>
@@ -90,7 +90,7 @@ const ApplicationListPage = () => {
               </div>
 
               <div className="relative z-10 space-y-2 mb-8">
-                <h3 className="text-xl font-black text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors uppercase">{app.name}</h3>
+                <h3 className="text-xl font-black text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors">{app.name}</h3>
                 <p className="text-sm font-bold text-slate-400 line-clamp-2">{app.description || 'No description provided for this application unit.'}</p>
               </div>
 
@@ -100,7 +100,7 @@ const ApplicationListPage = () => {
                     <Ticket className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Vol.</p>
+                    <p className="text-[10px] font-black text-slate-400 leading-none mb-1">Vol.</p>
                     <p className="text-xs font-black text-slate-900">{Math.floor(Math.random() * 200)} Tickets</p>
                   </div>
                 </div>
@@ -109,14 +109,14 @@ const ApplicationListPage = () => {
                     <Users className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Agents</p>
+                    <p className="text-[10px] font-black text-slate-400 leading-none mb-1">Agents</p>
                     <p className="text-xs font-black text-slate-900">{Math.floor(Math.random() * 12) + 1} Assigned</p>
                   </div>
                 </div>
               </div>
 
               <div className="pt-6 flex items-center justify-between relative z-10">
-                <span className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">Key: {app.id.slice(0, 8).toUpperCase()}</span>
+                <span className="text-[10px] font-black text-slate-300">Key: {app.id.slice(0, 8)}</span>
                 <Button variant="ghost" size="sm" className="text-indigo-600 font-black">
                   Manage Node <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>

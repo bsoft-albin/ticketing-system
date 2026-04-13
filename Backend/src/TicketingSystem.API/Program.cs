@@ -35,11 +35,13 @@ builder.Services.AddResponseCompression(options =>
     options.Providers.Add<GzipCompressionProvider>();
 });
 
+string allowedOrigins = builder.Configuration["AllowedOrigins"] ?? string.Empty;
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("AllowSpecificDomainsOnly", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins(allowedOrigins)
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
@@ -137,7 +139,7 @@ app.UseResponseCompression();
 
 app.UseRouting();
 
-app.UseCors("AllowAll");
+app.UseCors("AllowSpecificDomainsOnly");
 
 app.UseAuthentication();
 app.UseAuthorization();

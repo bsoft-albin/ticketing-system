@@ -29,18 +29,18 @@ const StatCard = ({ title, value, icon: Icon, color, trend, delay }: any) => (
     <div className={`absolute top-0 right-0 w-32 h-32 -mr-8 -mt-8 rounded-full opacity-[0.03] transition-transform group-hover:scale-150 duration-700 ${color}`}></div>
     <div className="flex items-start justify-between relative z-10">
       <div>
-        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">{title}</p>
+        <p className="text-[10px] font-black text-slate-400 mb-3">{title}</p>
         <h3 className="text-4xl font-black text-slate-900 tracking-tighter mb-4">{value}</h3>
         {trend && (
           <div className="flex items-center gap-2">
             <span className={cn(
-              "flex items-center text-[10px] font-black px-2 py-1 rounded-lg uppercase tracking-wider",
+              "flex items-center text-[10px] font-black px-2 py-1 rounded-lg",
               trend > 0 ? "bg-emerald-50 text-emerald-600" : "bg-rose-50 text-rose-600"
             )}>
               {trend > 0 ? <TrendingUp className="w-3 h-3 mr-1" /> : <Target className="w-3 h-3 mr-1" />}
               {Math.abs(trend)}%
             </span>
-            <span className="text-[10px] font-bold text-slate-400 uppercase">vs last month</span>
+            <span className="text-[10px] font-bold text-slate-400">vs last month</span>
           </div>
         )}
       </div>
@@ -177,10 +177,10 @@ const DashboardPage = () => {
             <table className="w-full text-left border-separate border-spacing-0">
               <thead>
                 <tr className="bg-slate-50/50">
-                  <th className="px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Ticket Identity</th>
-                  <th className="px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Current State</th>
-                  <th className="px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Priority</th>
-                  <th className="px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] text-right">Timestamp</th>
+                  <th className="px-8 py-4 text-[10px] font-black text-slate-400">Ticket Identity</th>
+                  <th className="px-8 py-4 text-[10px] font-black text-slate-400">Current State</th>
+                  <th className="px-8 py-4 text-[10px] font-black text-slate-400">Priority</th>
+                  <th className="px-8 py-4 text-[10px] font-black text-slate-400 text-right">Timestamp</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-50">
@@ -188,8 +188,8 @@ const DashboardPage = () => {
                   <tr key={ticket.id} className="group hover:bg-slate-50/50 transition-all cursor-pointer">
                     <td className="px-8 py-5">
                       <div className="flex flex-col">
-                        <span className="text-sm font-black text-slate-900 group-hover:text-indigo-600 transition-colors uppercase tracking-tight">{ticket.title}</span>
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">{ticket.appName}</span>
+                        <span className="text-sm font-black text-slate-900 group-hover:text-indigo-600 transition-colors tracking-tight">{ticket.title}</span>
+                        <span className="text-[10px] font-bold text-slate-400 mt-1">{ticket.appName}</span>
                       </div>
                     </td>
                     <td className="px-8 py-5">{getStatusBadge(ticket.status)}</td>
@@ -229,13 +229,13 @@ const DashboardPage = () => {
                       <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 border-2 border-white rounded-full"></div>
                     </div>
                     <div>
-                      <p className="text-sm font-black text-slate-900 group-hover:text-indigo-600 transition-colors uppercase tracking-tight">{agent.name}</p>
-                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{agent.role}</p>
+                      <p className="text-sm font-black text-slate-900 group-hover:text-indigo-600 transition-colors tracking-tight">{agent.name}</p>
+                      <p className="text-[10px] text-slate-400 font-bold">{agent.role}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs font-black text-slate-900">{agent.count} RESOLVED</p>
-                    <p className="text-[10px] text-emerald-600 font-black uppercase tracking-widest mt-0.5">TOP 5%</p>
+                    <p className="text-xs font-black text-slate-900">{agent.count} resolved</p>
+                    <p className="text-[10px] text-emerald-600 font-black mt-0.5">Top 5%</p>
                   </div>
                 </div>
               ))}
