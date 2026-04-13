@@ -7,20 +7,19 @@ import { Card } from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
 import api from '../api/axios';
+import { toast } from '../utils/toast';
 
 const RegisterPage = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
 
     try {
       await api.post('/auth/register', { 
@@ -29,9 +28,11 @@ const RegisterPage = () => {
         password 
       });
       setSuccess(true);
+      toast.success('Request received', 'Your access request has been submitted for verification.');
       setTimeout(() => navigate('/login'), 3000);
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+      const message = err.response?.data?.message || 'Registration failed. Please try again.';
+      toast.error('Registration failed', message);
     } finally {
       setIsLoading(false);
     }
@@ -98,15 +99,6 @@ const RegisterPage = () => {
 
         <Card glass className="bg-white/5 border-white/10 backdrop-blur-2xl px-10 py-12">
           <form onSubmit={handleSubmit} className="space-y-8">
-            {error && (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-2xl text-rose-400 text-sm font-bold text-center"
-              >
-                {error}
-              </motion.div>
-            )}
 
             <div className="space-y-6">
               <Input 

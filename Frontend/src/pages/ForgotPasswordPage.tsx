@@ -7,17 +7,16 @@ import { Card } from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
 import api from '../api/axios';
+import { toast } from '../utils/toast';
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
 
     try {
       // Backend expects [FromBody] string email, so we JSON.stringify it to include quotes
@@ -25,8 +24,10 @@ const ForgotPasswordPage = () => {
         headers: { 'Content-Type': 'application/json' }
       });
       setSuccess(true);
+      toast.success('Inbound message sent', 'Check your inbox for recovery instructions.');
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to send reset link. Please try again.');
+      const message = err.response?.data?.message || 'Failed to send reset link. Please try again.';
+      toast.error('Recovery failed', message);
     } finally {
       setIsLoading(false);
     }
@@ -83,15 +84,6 @@ const ForgotPasswordPage = () => {
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-8">
-              {error && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-2xl text-rose-400 text-sm font-bold text-center"
-                >
-                  {error}
-                </motion.div>
-              )}
 
               <div className="space-y-6">
                 <p className="text-slate-400 text-sm font-bold leading-relaxed">

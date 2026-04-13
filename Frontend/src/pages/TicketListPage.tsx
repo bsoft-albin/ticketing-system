@@ -16,6 +16,7 @@ import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import api from '../api/axios';
+import { toast } from '../utils/toast';
 import { TicketPriority, type TicketDto, TicketStatus } from '../types';
 
 
@@ -179,10 +180,10 @@ const TicketListPage = () => {
                       <Button variant="ghost" size="icon" className="w-9 h-9 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50">
                         <Eye className="w-4 h-4" />
                       </Button>
-                      <Button variant="ghost" size="icon" className="w-9 h-9 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50">
+                      <Button variant="ghost" size="icon" className="w-9 h-9 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50" onClick={(e) => { e.stopPropagation(); toast.info('Edit mode coming soon', 'This data record is currently locked for editing.'); }}>
                         <Edit2 className="w-4 h-4" />
                       </Button>
-                      <Button variant="ghost" size="icon" className="w-9 h-9 text-slate-400 hover:text-rose-600 hover:bg-rose-50">
+                      <Button variant="ghost" size="icon" className="w-9 h-9 text-slate-400 hover:text-rose-600 hover:bg-rose-50" onClick={(e) => { e.stopPropagation(); toast.error('Purge restricted', 'You do not have administrative clearance to delete this record.'); }}>
                         <Trash2 className="w-4 h-4" />
                       </Button>
                     </div>

@@ -8,26 +8,27 @@ import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
 import { useAuthStore } from '../store/authStore';
 import api from '../api/axios';
+import { toast } from '../utils/toast';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const navigate = useNavigate();
   const setAuth = useAuthStore((state) => state.setAuth);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
 
     try {
       const response = await api.post('/auth/login', { email, password });
       setAuth(response.data.data);
+      toast.success('Welcome back!', 'Successfully signed in to your workspace.');
       navigate('/');
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Invalid credentials. Please try again.');
+      const message = err.response?.data?.message || 'Invalid credentials. Please try again.';
+      toast.error('Authentication failed', message);
     } finally {
       setIsLoading(false);
     }
@@ -58,17 +59,8 @@ const LoginPage = () => {
 
         <Card glass className="bg-white/5 border-white/10 backdrop-blur-2xl px-10 py-12">
           <form onSubmit={handleSubmit} className="space-y-8">
-            {error && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-2xl text-rose-400 text-sm font-bold text-center"
-              >
-                {error}
-              </motion.div>
-            )}
 
-            <div className="space-y-6">
+            <div className="space-y-2">
               <Input
                 label="Email Address"
                 type="email"
@@ -79,15 +71,12 @@ const LoginPage = () => {
                 className="bg-white/5 border-white/10 text-white placeholder:text-slate-500 focus:bg-white/10"
                 icon={<Mail className="w-5 h-5" />}
               />
-
+              <div className="flex items-center justify-end space-y-1">
+                <Link to="/forgot-password" className="text-xs font-bold text-indigo-400 hover:text-indigo-300 transition-colors">Forgot password?</Link>
+              </div>
               <div className="space-y-2">
-                <div className="flex items-center justify-between px-1">
-                  <label className="text-sm font-black text-slate-400">Password</label>
-                  <Link to="/forgot-password" className="text-xs font-bold text-indigo-400 hover:text-indigo-300 transition-colors">Forgot password?</Link>
-
-
-                </div>
                 <Input
+                  label="Password"
                   type="password"
                   placeholder="••••••••"
                   value={password}

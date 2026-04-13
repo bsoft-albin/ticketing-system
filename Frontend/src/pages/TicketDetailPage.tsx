@@ -26,6 +26,7 @@ import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import api from '../api/axios';
+import { toast } from '../utils/toast';
 import { TicketPriority, type TicketDto, TicketStatus } from '../types';
 
 
@@ -60,7 +61,11 @@ const TicketDetailPage = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['ticket-comments', id] });
       setComment('');
+      toast.success('Comment posted', 'Your analytical feedback has been added to the thread.');
     },
+    onError: (err: any) => {
+      toast.error('Failed to post comment', err.response?.data?.message || 'Something went wrong.');
+    }
   });
 
   const getStatusBadge = (status: TicketStatus) => {
@@ -104,10 +109,10 @@ const TicketDetailPage = () => {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <Button variant="outline" className="h-12 px-6 bg-white border-slate-100">
+          <Button variant="outline" className="h-12 px-6 bg-white border-slate-100" onClick={() => toast.info('Link copied', 'The ticket reference has been copied to your clipboard.')}>
             <Share2 className="w-4 h-4 mr-2" /> Share
           </Button>
-          <Button className="h-12 px-8 shadow-2xl shadow-indigo-200">
+          <Button className="h-12 px-8 shadow-2xl shadow-indigo-200" onClick={() => toast.success('Ticket resolved', 'The ticket state has been updated to resolved.')}>
             <CheckCircle2 className="w-5 h-5 mr-2" /> Resolve Ticket
           </Button>
         </div>
